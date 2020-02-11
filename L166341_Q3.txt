@@ -1,0 +1,84 @@
+#include<stdio.h>
+#include<string.h>
+#include <stdbool.h>
+#include <stdlib.h>
+#define MAXCHAR 1000
+
+int main(int arg , char* array[])
+{
+
+    FILE *fp = (fopen(array[1], "r+"));
+bool check;
+int i,count=0,count1=0,j=0,l,t,count3=0,y=0;
+    char temp[100];
+char result[100];
+    if (!fopen(array[1], "r+"))
+        printf("Error!! File Not Opened.");
+
+    else
+{
+
+while(fgets(temp,MAXCHAR,fp)!=NULL)
+{
+char word[10];
+int x =strlen(temp);
+
+temp[x] ='\0';
+for(i=0;i<x;i++)
+{
+word[count1]=temp[i];
+count1++;
+  if(temp[i]==' ')
+{
+
+count1--;
+count = count+count1+y;
+
+for (t = 0; word[t] != '\0'; t++) {
+       if (word[t] == 'a' || word[t] == 'e' || word[t] == 'i' ||
+           word[t] == 'o' || word[t] == 'u' || word[t] == 'A' ||
+           word[t] == 'E' || word[t] == 'I' || word[t] == 'O' ||
+           word[t] == 'U')
+           check = true;
+}
+if(check){
+while(j<=count)
+{
+result[j]=word[count3];
+j++;
+count3++;
+}
+count1=0;
+count3=0;
+check =false;
+memset(word,0,strlen(word));
+y=1;
+}
+else
+{
+
+int k,count2=0;
+char temp1[100];
+for(l=0; word[l]!='\0'; l++)
+       count2++;
+  for(k=(count2-2),l=0; k>=0; l++,k--)
+       temp1[l]=word[k];
+while(j<count)
+{
+result[j]=temp1[count3];
+j++;
+count3++;
+}
+count1=0;
+count3=0;
+
+word[0]= '\0';
+y=1;
+}
+}
+}
+}
+fputs(result,fp);
+}
+ return 0;
+}
